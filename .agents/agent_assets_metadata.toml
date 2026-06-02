@@ -1,0 +1,32 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "iVqZd0pebB2vP8x8J-gPv"
+uri = "file://artifacts/cyborg-landing/src/assets/images/hero-arm.png"
+type = "image"
+title = "Isometric human arm augmentation"
+
+[[generated]]
+id = "jf-5v6MLyty3tOBPRsrKH"
+uri = "file://artifacts/cyborg-landing/src/assets/images/neural-chip.png"
+type = "image"
+title = "Isometric neural chip above palm"
+
+[[generated]]
+id = "9Sr9jNvMitUz4pQEoqgAr"
+uri = "file://artifacts/cyborg-landing/src/assets/images/spine-render.png"
+type = "image"
+title = "3D titanium spine exoskeletal segment"
+
+[[generated]]
+id = "kdbm4iEwLLDAjAqpJcmNH"
+uri = "file://artifacts/cyborg-landing/src/assets/images/eye-blueprint.png"
+type = "image"
+title = "Cross-section human eye layered lens"
+
+[[generated]]
+id = "u3YcGD4zuN7CkGCL2OQyk"
+uri = "file://artifacts/cyborg-landing/src/assets/images/lab-scene.png"
+type = "image"
+title = "Engineer in minimal white lab"

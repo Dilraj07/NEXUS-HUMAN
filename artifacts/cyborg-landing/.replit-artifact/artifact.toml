@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Cyborg Landing Page"
+version = "1.0.0"
+id = "artifacts/cyborg-landing"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20621
+
+[services.development]
+run = "pnpm --filter @workspace/cyborg-landing run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cyborg-landing", "run", "build" ]
+publicDir = "artifacts/cyborg-landing/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20621"
+BASE_PATH = "/"
