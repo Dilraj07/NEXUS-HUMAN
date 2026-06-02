@@ -8,8 +8,7 @@ export function CTASection() {
 
   return (
     <section id="cta" ref={ref} className="relative bg-[#F5F4F0] py-28 md:py-40 overflow-hidden">
-      {/* Subtle grid */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none">
+      <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" aria-hidden>
         <defs>
           <pattern id="cta-grid" width="60" height="60" patternUnits="userSpaceOnUse">
             <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#0E0E12" strokeWidth="0.5" />
@@ -18,7 +17,6 @@ export function CTASection() {
         <rect width="100%" height="100%" fill="url(#cta-grid)" />
       </svg>
 
-      {/* Decorative amber line top */}
       <div className="absolute top-0 left-12 right-12 h-px bg-[#C8922A]/30" />
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -72,7 +70,7 @@ export function CTASection() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="relative inline-flex items-center gap-3 px-10 py-5 bg-[#0E0E12] text-[#F5F4F0] font-mono text-xs uppercase tracking-widest hover:bg-[#C8922A] transition-colors duration-300"
+              className="relative inline-flex items-center gap-3 px-10 py-5 bg-[#0E0E12] text-[#F5F4F0] font-mono text-xs uppercase tracking-widest hover:bg-[#C8922A] hover:text-[#0E0E12] transition-colors duration-150"
               data-testid="button-join-registry"
             >
               <span className="absolute inset-[3px] border border-white/10 pointer-events-none" />
@@ -83,31 +81,12 @@ export function CTASection() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-3 px-10 py-5 border border-[#0E0E12]/25 text-[#0E0E12] font-mono text-xs uppercase tracking-widest hover:border-[#C8922A] hover:text-[#C8922A] transition-all duration-300"
+              className="inline-flex items-center gap-3 px-10 py-5 border border-[#0E0E12]/25 text-[#0E0E12] font-mono text-xs uppercase tracking-widest hover:border-[#C8922A] hover:text-[#C8922A] transition-all duration-150"
               data-testid="button-read-manifesto"
             >
               Read Manifesto
             </motion.button>
           </motion.div>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="absolute bottom-0 left-0 right-0 border-t border-[#0E0E12]/10">
-        <div className="container mx-auto px-6 md:px-12 py-6 flex justify-between items-center">
-          <div className="font-mono text-[10px] text-[#0E0E12]/40 uppercase tracking-widest">
-            &copy; {new Date().getFullYear()} Nexus Human
-          </div>
-          <div className="hidden md:flex gap-8">
-            {["Manifesto", "Clinical Data", "Privacy", "Contact"].map((link) => (
-              <a key={link} href="#" className="font-mono text-[10px] text-[#0E0E12]/40 hover:text-[#0E0E12] transition-colors uppercase tracking-widest">
-                {link}
-              </a>
-            ))}
-          </div>
-          <div className="font-mono text-[10px] text-[#0E0E12]/40 uppercase tracking-widest">
-            Syndicate // 09
-          </div>
         </div>
       </div>
     </section>

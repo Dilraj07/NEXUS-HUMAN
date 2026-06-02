@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { IntroSection } from "@/components/sections/IntroSection";
 import { TechSection } from "@/components/sections/TechSection";
@@ -18,6 +19,7 @@ export default function Home() {
       <GallerySection />
       <EvidenceSection />
       <CTASection />
+      <Footer />
     </main>
   );
 }
