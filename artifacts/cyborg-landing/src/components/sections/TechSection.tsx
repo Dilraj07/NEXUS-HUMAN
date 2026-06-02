@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import eyeBlueprintImg from "@/assets/images/eye-blueprint.png";
 import { Reticle } from "@/components/svgs/Reticle";
+import { DraggableImage } from "@/components/DraggableImage";
 
 const specs = [
   { label: "Spectrum Range", value: "300nm – 1100nm" },
@@ -16,8 +17,7 @@ export function TechSection() {
   const isInView = useInView(ref, { once: true, margin: "-15%" });
 
   return (
-    <section id="technology" ref={ref} className="relative bg-[#F5F4F0] py-28 md:py-36 overflow-hidden">
-      {/* Right accent line */}
+    <section id="technology" ref={ref} className="relative bg-[#F5F4F0] py-28 md:py-36 overflow-visible">
       <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#C8922A]/30 to-transparent" />
 
       <div className="container mx-auto px-6 md:px-12">
@@ -34,26 +34,25 @@ export function TechSection() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Image */}
+          {/* Draggable Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
+            className="relative group"
           >
-            <div className="relative aspect-square bg-white border border-[#0E0E12]/8">
-              <img
+            <div className="relative aspect-square bg-white border border-[#0E0E12]/8 overflow-visible">
+              <DraggableImage
                 src={eyeBlueprintImg}
                 alt="Ocular Augmentation Blueprint"
-                className="w-full h-full object-cover"
+                className="w-full h-full"
+                imgClassName="w-full h-full object-cover"
               />
-              {/* Corner brackets */}
-              <Reticle className="absolute top-4 left-4 w-6 h-6 text-[#C8922A]" />
-              <Reticle className="absolute bottom-4 right-4 w-6 h-6 text-[#C8922A] rotate-180" />
-              {/* Label */}
-              <div className="absolute bottom-0 left-0 right-0 bg-[#0E0E12] px-5 py-3 flex justify-between items-center">
+              <Reticle className="absolute top-4 left-4 w-6 h-6 text-[#C8922A] pointer-events-none z-10" />
+              <Reticle className="absolute bottom-4 right-4 w-6 h-6 text-[#C8922A] rotate-180 pointer-events-none z-10" />
+              <div className="absolute bottom-0 left-0 right-0 bg-[#0E0E12] px-5 py-3 flex justify-between items-center z-10 pointer-events-none">
                 <span className="font-mono text-[10px] tracking-widest uppercase text-white/50">Nexus Ocular — X4</span>
-                <span className="font-mono text-[10px] text-[#C8922A]">Blueprint Rev.3</span>
+                <span className="font-mono text-[10px] text-[#C8922A]">Hold + Drag</span>
               </div>
             </div>
           </motion.div>

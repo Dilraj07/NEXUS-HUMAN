@@ -1,0 +1,28 @@
+. Immediate Fix: Contrast in the Header
+The Issue: Looking at the screenshot, the "NEXUS HUMAN" logo/nav text at the top left is currently a very light color (almost white) on a cream/white background. It is nearly invisible.
+
+The Fix: Change this to your primary dark text color (#0E0E12) or your amber accent (#C8922A) when resting on light sections. If you have a sticky nav that transitions to dark sections, ensure the text color swaps automatically.
+
+2. Balance the Hero Section
+The Issue: The right side of the hero section is dominated by empty space with only amber corner brackets [  ].
+
+The Fix: If an image (like the "Isometric human arm augmentation" mentioned in your asset list) is supposed to be there, ensure the image container has a fallback or wireframe while loading. If you want to keep it text-focused, consider adding an intricate, rotating 3D wireframe SVG of a spine or neural chip in that space.
+
+3. Motion & Micro-Interactions (Replacing Glow)
+Since we are avoiding glow, motion is your best tool to make the site feel alive and technological.
+
+Typewriter Reveal: Animate the PROTOCOL // 001 — HUMAN AUGMENTATION text to type out sequentially when the page loads, mimicking a boot-up sequence or terminal readout.
+
+Bracket Snapping: Make the amber [  ] brackets animate inward and "snap" into place around elements as you scroll down the page.
+
+Hover States: Instead of buttons glowing on hover, have them invert (e.g., black background turns amber, text turns black) with a harsh, instantaneous cut (0ms transition time) to simulate machine-like responsiveness rather than a smooth, "soft" human fade.
+
+4. Texture and Depth
+Subtle Grids: Apply a very faint, low-opacity dot grid or blueprint grid background to the light #F5F4F0 sections. It shouldn't distract from the text, but it subliminally reinforces the "engineering canvas" theme.
+
+Parallax Scroll: You mentioned wanting parallax in your Replit prompt. Apply a slight negative scroll speed to background elements (like the oversized numbers 01, 02, 03) so they move slower than the foreground text. It creates depth without needing heavy 3D rendering.
+
+5. Technical UI Details
+Custom Cursor: Replace the default mouse pointer with a minimalist UI crosshair [ + ] or a small hollow square. This makes the user feel like they are operating precision software rather than just browsing a website.
+
+Data Visualization: For the metrics section (e.g., "0.01ms SIGNAL LATENCY"), don't just use text. Include minimalist UI elements like segmented progress bars, battery-style indicators, or rotating azimuth dials next to the numbers to make it look like a live telemetry dashboard.

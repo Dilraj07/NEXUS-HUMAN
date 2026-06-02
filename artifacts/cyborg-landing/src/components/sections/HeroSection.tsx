@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroArmImg from "@/assets/images/hero-arm.png";
 import { Reticle } from "@/components/svgs/Reticle";
+import { DraggableImage } from "@/components/DraggableImage";
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,7 +84,7 @@ export function HeroSection() {
             >
               <a
                 href="#systems"
-                className="inline-flex items-center gap-3 px-7 py-4 bg-[#0E0E12] text-[#F5F4F0] font-mono text-xs uppercase tracking-widest hover:bg-[#C8922A] transition-colors duration-300"
+                className="inline-flex items-center gap-3 px-7 py-4 bg-[#0E0E12] text-[#F5F4F0] font-mono text-xs uppercase tracking-widest hover:bg-[#C8922A] hover:text-[#0E0E12] transition-colors duration-150"
               >
                 Explore Systems
                 <span className="text-base leading-none">→</span>
@@ -97,7 +98,7 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Image */}
+          {/* RIGHT: Draggable Image */}
           <motion.div
             style={{ y: yImage }}
             className="relative flex items-center justify-center h-[55vh] lg:h-[80vh]"
@@ -106,24 +107,26 @@ export function HeroSection() {
             transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Corner bracket decorations */}
-            <div className="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-[#C8922A]/60 z-10" />
-            <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-[#C8922A]/60 z-10" />
-            <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-[#C8922A]/60 z-10" />
-            <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-[#C8922A]/60 z-10" />
+            <div className="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-[#C8922A]/60 z-10 pointer-events-none" />
+            <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-[#C8922A]/60 z-10 pointer-events-none" />
+            <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-[#C8922A]/60 z-10 pointer-events-none" />
+            <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-[#C8922A]/60 z-10 pointer-events-none" />
 
             {/* Scan line accent */}
-            <div className="absolute left-6 right-6 top-1/2 h-px bg-[#C8922A]/20 z-10" />
+            <div className="absolute left-6 right-6 top-1/2 h-px bg-[#C8922A]/15 z-0 pointer-events-none" />
 
-            <img
+            {/* Draggable arm image */}
+            <DraggableImage
               src={heroArmImg}
               alt="Nexus Human Augmentation System"
-              className="w-full h-full object-contain relative z-0 drop-shadow-2xl"
+              className="w-full h-full group"
+              imgClassName="w-full h-full object-contain drop-shadow-2xl"
             />
 
-            {/* Floating spec tag */}
-            <div className="absolute bottom-8 right-8 bg-[#0E0E12] text-[#F5F4F0] px-4 py-3 font-mono text-[10px] tracking-widest uppercase z-20">
+            {/* Drag hint overlay */}
+            <div className="absolute bottom-8 right-8 bg-[#0E0E12] text-[#F5F4F0] px-4 py-3 font-mono text-[10px] tracking-widest uppercase z-20 pointer-events-none">
               <div className="text-[#C8922A] mb-1">MODEL A-1</div>
-              <div className="text-white/60">Upper Limb Augmentation</div>
+              <div className="text-white/60">Hold + Drag to deform</div>
             </div>
           </motion.div>
 
@@ -133,7 +136,7 @@ export function HeroSection() {
       {/* Scroll indicator */}
       <motion.div
         style={{ opacity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none"
       >
         <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#0E0E12]/40">Scroll</span>
         <div className="w-px h-12 bg-[#0E0E12]/20 overflow-hidden relative">

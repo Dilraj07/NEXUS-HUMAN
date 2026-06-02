@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import spineImg from "@/assets/images/spine-render.png";
 import chipImg from "@/assets/images/neural-chip.png";
+import { DraggableImage } from "@/components/DraggableImage";
 
 const features = [
   {
@@ -47,7 +48,7 @@ export function StickyFeaturesSection() {
 
   return (
     <section id="systems" ref={containerRef} className="relative h-[200vh] bg-[#0E0E12]">
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center">
+      <div className="sticky top-0 h-screen overflow-visible flex items-center">
         {/* Dot grid */}
         <svg className="absolute inset-0 w-full h-full opacity-[0.05] pointer-events-none">
           <defs>
@@ -59,7 +60,6 @@ export function StickyFeaturesSection() {
         </svg>
 
         <div className="container mx-auto px-6 md:px-12 w-full relative z-10">
-          {/* Section header */}
           <div className="flex items-center gap-4 mb-12">
             <div className="w-8 h-px bg-[#C8922A]" />
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#C8922A]">
@@ -68,15 +68,9 @@ export function StickyFeaturesSection() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-            {/* LEFT: Switching text content */}
+            {/* LEFT: Switching text */}
             <div className="relative h-[420px]">
-
-              {/* Feature 1 */}
-              <motion.div
-                style={{ opacity: opacity1, y: y1 }}
-                className="absolute inset-0 flex flex-col justify-center"
-              >
+              <motion.div style={{ opacity: opacity1, y: y1 }} className="absolute inset-0 flex flex-col justify-center">
                 <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#C8922A] mb-3">
                   {features[0].id} / {features[0].tag}
                 </div>
@@ -96,11 +90,7 @@ export function StickyFeaturesSection() {
                 </div>
               </motion.div>
 
-              {/* Feature 2 */}
-              <motion.div
-                style={{ opacity: opacity2, y: y2 }}
-                className="absolute inset-0 flex flex-col justify-center"
-              >
+              <motion.div style={{ opacity: opacity2, y: y2 }} className="absolute inset-0 flex flex-col justify-center">
                 <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#C8922A] mb-3">
                   {features[1].id} / {features[1].tag}
                 </div>
@@ -121,37 +111,40 @@ export function StickyFeaturesSection() {
               </motion.div>
             </div>
 
-            {/* RIGHT: Switching image */}
+            {/* RIGHT: Draggable image switcher */}
             <div className="relative h-[480px] lg:h-[520px]">
-              {/* Image 1 */}
-              <motion.div
-                style={{ opacity: imgOpacity1 }}
-                className="absolute inset-0"
-              >
-                <div className="relative w-full h-full border border-white/10 bg-white/[0.02]">
-                  <img src={features[0].image} alt={features[0].title} className="w-full h-full object-contain p-8" />
-                  <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-[#C8922A]/80" />
-                  <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-[#C8922A]/80" />
-                  <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-[#C8922A]/80" />
-                  <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-[#C8922A]/80" />
+              <motion.div style={{ opacity: imgOpacity1 }} className="absolute inset-0">
+                <div className="relative w-full h-full border border-white/10 bg-white/[0.02] overflow-visible">
+                  <DraggableImage
+                    src={features[0].image}
+                    alt={features[0].title}
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-contain p-8"
+                  />
+                  <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-[#C8922A]/80 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-[#C8922A]/80 pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-[#C8922A]/80 pointer-events-none" />
+                  <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-[#C8922A]/80 pointer-events-none" />
+                  <div className="absolute bottom-3 right-3 font-mono text-[9px] text-[#C8922A]/60 uppercase tracking-widest pointer-events-none">Hold + Drag</div>
                 </div>
               </motion.div>
 
-              {/* Image 2 */}
-              <motion.div
-                style={{ opacity: imgOpacity2 }}
-                className="absolute inset-0"
-              >
-                <div className="relative w-full h-full border border-[#C8922A]/30 bg-white/[0.02]">
-                  <img src={features[1].image} alt={features[1].title} className="w-full h-full object-contain p-8" />
-                  <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-[#C8922A]" />
-                  <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-[#C8922A]" />
-                  <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-[#C8922A]" />
-                  <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-[#C8922A]" />
+              <motion.div style={{ opacity: imgOpacity2 }} className="absolute inset-0">
+                <div className="relative w-full h-full border border-[#C8922A]/30 bg-white/[0.02] overflow-visible">
+                  <DraggableImage
+                    src={features[1].image}
+                    alt={features[1].title}
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-contain p-8"
+                  />
+                  <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-[#C8922A] pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-[#C8922A] pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-[#C8922A] pointer-events-none" />
+                  <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-[#C8922A] pointer-events-none" />
+                  <div className="absolute bottom-3 right-3 font-mono text-[9px] text-[#C8922A]/60 uppercase tracking-widest pointer-events-none">Hold + Drag</div>
                 </div>
               </motion.div>
             </div>
-
           </div>
         </div>
       </div>
