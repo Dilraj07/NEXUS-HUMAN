@@ -101,13 +101,13 @@
   --secondary-foreground: 240 10% 10%;
   --muted: 240 5% 90%;
   --muted-foreground: 240 5% 40%;
-  --accent: 180 50% 40%;
-  --accent-foreground: 60 10% 98%;
+  --accent: 38 80% 48%;
+  --accent-foreground: 240 10% 10%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 60 10% 98%;
   --input: 240 5% 84%;
   --ring: 240 10% 10%;
-  --chart-1: 180 50% 40%;
+  --chart-1: 38 80% 48%;
   --chart-2: 200 40% 50%;
   --chart-3: 160 30% 60%;
   --chart-4: 190 20% 70%;

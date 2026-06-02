@@ -1,68 +1,99 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Reticle } from "@/components/svgs/Reticle";
 import eyeBlueprintImg from "@/assets/images/eye-blueprint.png";
+import { Reticle } from "@/components/svgs/Reticle";
+
+const specs = [
+  { label: "Spectrum Range", value: "300nm – 1100nm" },
+  { label: "Latency", value: "< 0.2ms" },
+  { label: "Casing Material", value: "Sapphire Glass / Ti-6Al-4V" },
+  { label: "Implant Class", value: "III — Neural Interface" },
+  { label: "Power Source", value: "Bioelectric Harvest" },
+];
 
 export function TechSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-20%" });
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-15%" });
 
   return (
-    <section ref={containerRef} className="relative py-32 bg-background text-foreground overflow-hidden">
+    <section id="technology" ref={ref} className="relative bg-[#F5F4F0] py-28 md:py-36 overflow-hidden">
+      {/* Right accent line */}
+      <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#C8922A]/30 to-transparent" />
+
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          <div className="order-2 lg:order-1 relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative aspect-square w-full"
-            >
-              <div className="absolute inset-0 bg-muted/20" />
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="flex items-center gap-4 mb-16"
+        >
+          <div className="w-8 h-px bg-[#C8922A]" />
+          <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#0E0E12]/50">
+            Protocol // 003 — Ocular Systems
+          </span>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative"
+          >
+            <div className="relative aspect-square bg-white border border-[#0E0E12]/8">
               <img
                 src={eyeBlueprintImg}
-                alt="Eye Blueprint"
-                className="w-full h-full object-cover mix-blend-multiply"
+                alt="Ocular Augmentation Blueprint"
+                className="w-full h-full object-cover"
               />
-              <Reticle className="absolute top-4 left-4 text-accent w-6 h-6" />
-              <Reticle className="absolute bottom-4 right-4 text-accent w-6 h-6 rotate-180" />
-            </motion.div>
-          </div>
-          
-          <div className="order-1 lg:order-2">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="inline-flex items-center gap-3 px-3 py-1 border border-border mb-8">
-                <div className="w-2 h-2 bg-accent" />
-                <span className="font-mono text-xs uppercase tracking-widest font-bold">Ocular Augmentation</span>
+              {/* Corner brackets */}
+              <Reticle className="absolute top-4 left-4 w-6 h-6 text-[#C8922A]" />
+              <Reticle className="absolute bottom-4 right-4 w-6 h-6 text-[#C8922A] rotate-180" />
+              {/* Label */}
+              <div className="absolute bottom-0 left-0 right-0 bg-[#0E0E12] px-5 py-3 flex justify-between items-center">
+                <span className="font-mono text-[10px] tracking-widest uppercase text-white/50">Nexus Ocular — X4</span>
+                <span className="font-mono text-[10px] text-[#C8922A]">Blueprint Rev.3</span>
               </div>
-              <h3 className="font-display text-4xl md:text-6xl font-bold uppercase leading-[0.9] mb-8">
-                Perception<br/>
-                <span className="text-muted-foreground">Redefined.</span>
-              </h3>
-              <p className="font-mono text-muted-foreground leading-relaxed mb-8 max-w-md">
-                The layered lens augmentation intercepts photons before they hit the retina, filtering, magnifying, and analyzing data streams in real-time. Rendered in a sub-millimeter titanium casing.
-              </p>
-              
-              <ul className="space-y-4 font-mono text-sm border-t border-border pt-8">
-                <li className="flex justify-between items-center border-b border-border pb-4">
-                  <span className="text-muted-foreground">Spectrum Range</span>
-                  <span className="font-bold text-foreground">300nm - 1100nm</span>
-                </li>
-                <li className="flex justify-between items-center border-b border-border pb-4">
-                  <span className="text-muted-foreground">Latency</span>
-                  <span className="font-bold text-foreground">&lt; 0.2ms</span>
-                </li>
-                <li className="flex justify-between items-center border-b border-border pb-4">
-                  <span className="text-muted-foreground">Material</span>
-                  <span className="font-bold text-foreground">Sapphire Glass / Ti-6Al-4V</span>
-                </li>
-              </ul>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
+
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col justify-center"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#0E0E12] mb-8 self-start">
+              <div className="w-1.5 h-1.5 bg-[#C8922A]" />
+              <span className="font-mono text-[10px] uppercase tracking-widest text-white">Ocular Augmentation</span>
+            </div>
+
+            <h2 className="font-display text-[clamp(2.5rem,5vw,5rem)] font-bold uppercase leading-[0.9] tracking-tight text-[#0E0E12] mb-6">
+              Perception<br />
+              <span className="text-[#C8922A]">Redefined.</span>
+            </h2>
+
+            <p className="font-mono text-xs text-[#0E0E12]/60 leading-relaxed mb-10 max-w-md">
+              The layered lens intercepts photons before retinal contact — filtering, magnifying, and analyzing data streams in real-time. Housed in a sub-millimeter sapphire casing. Bioelectrically powered. Invisible at inspection range.
+            </p>
+
+            <div className="border-t border-[#0E0E12]/10">
+              {specs.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.3 + i * 0.07 }}
+                  className="flex justify-between items-center py-4 border-b border-[#0E0E12]/10 group hover:bg-[#0E0E12]/[0.02] transition-colors"
+                >
+                  <span className="font-mono text-[11px] text-[#0E0E12]/50 uppercase tracking-wider">{s.label}</span>
+                  <span className="font-mono text-[11px] font-bold text-[#0E0E12] group-hover:text-[#C8922A] transition-colors">{s.value}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
