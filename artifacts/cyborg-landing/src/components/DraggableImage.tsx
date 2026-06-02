@@ -104,6 +104,8 @@ export function DraggableImage({ src, alt, className, imgClassName }: DraggableI
 
   const containerRef = useRef<HTMLDivElement>(null);
   const displacementRef = useRef<SVGFEDisplacementMapElement>(null);
+  const fiberSvgRef = useRef<SVGSVGElement>(null);
+  const fadeOutTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // path refs: [fiberIndex][strandIndex]
   const pathRefs = useRef<(SVGPathElement | null)[][]>(
@@ -248,10 +250,16 @@ export function DraggableImage({ src, alt, className, imgClassName }: DraggableI
         </defs>
       </svg>
 
-      {/* Muscle fiber SVG overlay */}
+      {/* Muscle fiber SVG — behind the image, hidden until drag */}
       <svg
-        className="absolute inset-0 pointer-events-none z-20"
-        style={{ width: "100%", height: "100%", overflow: "visible" }}
+        ref={fiberSvgRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          width: "100%", height: "100%", overflow: "visible",
+          opacity: 0,
+          transition: "opacity 0.18s ease",
+          zIndex: 5,
+        }}
         aria-hidden
       >
         {FIBER_DEFS.map((fiber, fi) => (
@@ -308,6 +316,10 @@ export function DraggableImage({ src, alt, className, imgClassName }: DraggableI
           zIndex: 10,
         }}
         whileDrag={{ cursor: "grabbing" }}
+        onDragStart={() => {
+          if (fadeOutTimer.current) clearTimeout(fadeOutTimer.current);
+          if (fiberSvgRef.current) fiberSvgRef.current.style.opacity = "1";
+        }}
         onDrag={(_: unknown, info: { offset: { x: number; y: number } }) => {
           updateDisplacement(Math.sqrt(info.offset.x ** 2 + info.offset.y ** 2));
           updateFibers(info.offset.x, info.offset.y);
@@ -318,7 +330,10 @@ export function DraggableImage({ src, alt, className, imgClassName }: DraggableI
           decayDisplacement();
           const u1 = x.on("change", (v) => updateFibers(v, y.get()));
           const u2 = y.on("change", (v) => updateFibers(x.get(), v));
-          setTimeout(() => { u1(); u2(); updateFibers(0, 0); }, 1200);
+          fadeOutTimer.current = setTimeout(() => {
+            u1(); u2(); updateFibers(0, 0);
+            if (fiberSvgRef.current) fiberSvgRef.current.style.opacity = "0";
+          }, 900);
         }}
       >
         <img
